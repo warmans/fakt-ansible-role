@@ -1,0 +1,49 @@
+---
+- include: ufw.yml
+  when: fakt_use_ufw|bool == true
+
+- include: nginx.yml
+  when: fakt_use_nginx|bool == true
+
+- name: Install PIP
+  apt:
+    name: python-pip
+    update_cache: yes
+
+- pip:
+    name: docker-py
+    version: 1.7.0
+
+- name: Setup API container
+  docker_container:
+    name: api
+    state: started
+    restart: true
+    image: "{{ fakt_api_image }}"
+    pull: true
+    restart_policy: always
+    volumes:
+      - "/opt/fakt-api/db:/opt/fakt-api/db"
+      - "/var/log/fakt-api:/var/log/fakt-api"
+    published_ports:
+      - "8080:8080"
+    env: 
+      SERVER_ENCRYPTION_KEY: changeme912345678901234567812312
+
+- name: Setup UI container
+  docker_container:
+    name: ui
+    state: started
+    restart: true
+    image: "{{ fakt_ui_image }}"
+    pull: true
+    restart_policy: always
+    volumes:
+      - "/var/log/fakt-ui:/var/log/fakt-ui"
+    published_ports:
+      - "8081:8081"
+    links:
+      - api
+    env:
+      API_FAKT_HOST: http://api:8080
+
