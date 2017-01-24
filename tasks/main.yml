@@ -24,6 +24,7 @@
     restart_policy: always
     volumes:
       - "/opt/fakt-api/db:/opt/fakt-api/db"
+      - "/opt/fakt-api/static:/opt/fakt-api/static"
       - "/var/log/fakt-api:/var/log/fakt-api"
     published_ports:
       - "8080:8080"
