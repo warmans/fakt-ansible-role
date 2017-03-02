@@ -3,7 +3,7 @@ fakt_use_ufw: true
 fakt_use_nginx: true
 
 fakt_api_hostname: api.fakt.pw
-fakt_api_image: warmans/fakt-api:2.0.0
+fakt_api_image: warmans/fakt-api:3.0.0
 fakt_api_encryption_key: changeme912345678901234567812312
 
 fakt_ui_hostname: ui.fakt.pw
