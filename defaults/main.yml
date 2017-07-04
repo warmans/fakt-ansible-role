@@ -2,9 +2,13 @@
 fakt_use_ufw: true
 fakt_use_nginx: true
 
+fakt_api_server_bind: :8080
 fakt_api_hostname: api.fakt.pw
-fakt_api_image: warmans/fakt-api:3.0.0
+fakt_api_image: warmans/fakt-api:2.0.0
 fakt_api_encryption_key: changeme912345678901234567812312
+fakt_api_crawler_sfaktor_uri: https://stressfaktor.squat.net/termine.php?days=all
+fakt_api_db_path: /opt/fakt-api/db/db.sqlite3
+fakt_api_log_verbose: false
 
 fakt_ui_hostname: ui.fakt.pw
 fakt_ui_image: warmans/fakt-ui:2.0.0

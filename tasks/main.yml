@@ -28,8 +28,12 @@
       - "/var/log/fakt-api:/var/log/fakt-api"
     published_ports:
       - "8080:8080"
-    env: 
-      SERVER_ENCRYPTION_KEY: changeme912345678901234567812312
+    env:
+      SERVER_BIND: "{{ fakt_api_server_bind }}"
+      SERVER_ENCRYPTION_KEY: "{{ fakt_api_encryption_key }}"
+      CRAWLER_STRESSFAKTOR_URI: "{{ fakt_api_crawler_sfaktor_uri }}"
+      DB_PATH: "{{ fakt_api_db_path }}"
+      LOG_VERBOSE: "{{ fakt_api_log_verbose }}"
 
 - name: Setup UI container
   docker_container:
